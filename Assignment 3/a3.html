@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Guess the Number Game</h1>
+
+    <script>
+        
+        function startGame() {
+            // Generate a random number between 1 and 100
+            const targetNumber = Math.floor(Math.random() * 100) + 1;
+
+            // Variables to keep track of game state
+            let turns = 10;
+            let previousGuesses = [];
+
+            // Function to handle player's guess
+            function makeGuess() {
+                const playerGuess = prompt("Enter your guess (between 1 and 100):");
+                const guess = parseInt(playerGuess);
+
+                // Check if the guess is valid
+                if (isNaN(guess) || guess < 1 || guess > 100) {
+                    alert("Please enter a valid number between 1 and 100.");
+                    makeGuess();
+                    return;
+                }
+
+                
+                turns--;
+
+                // Check if the guess is correct
+                if (guess === targetNumber) {
+                    alert(`Congratulations! You guessed the number ${targetNumber} in ${10 - turns} turns.`);
+                    playAgain();
+                } else {
+                    // Provide feedback on the guess
+                    const feedback = guess < targetNumber ? "Too low!" : "Too high!";
+                    alert(`Wrong guess. ${feedback} Turns left: ${turns}.`);
+                    // Keep track of previous guesses
+                    previousGuesses.push(guess);
+                    alert(`Previous guesses: ${previousGuesses.join(', ')}`);
+                    // Check if the player has run out of turns
+                    if (turns === 0) {
+                        alert(`Sorry, you've run out of turns. The correct number was ${targetNumber}.`);
+                        playAgain();
+                    } else {
+                        makeGuess();
+                    }
+                }
+            }
+
+            // Function to ask if the player wants to play again
+            function playAgain() {
+                const playAgain = confirm("Do you want to play again?");
+                if (playAgain) {
+                    startGame();
+                } else {
+                    alert("Thanks for playing!");
+                }
+            }
+
+            // Start the game
+            makeGuess();
+        }
+
+        // Call the function to start the game when the page loads
+        window.onload = startGame;
+    </script>
+
+</body>
+</html>

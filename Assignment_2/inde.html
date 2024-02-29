@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3><span id="turns">10</span></h3>
+
+</body>
+<script>
+    let random = Math.random()%100;
+    let turns = 10;
+    let turns_ch = document.querySelector('#turns');
+    let input = prompt("Enter number");
+
+    while (turns)
+    {
+        if (random === input)
+        {
+            alert('you gussed right number');
+            break;
+        }
+        turns --;
+        turns_ch.innerHTML = `${turns}`;
+    }
+
+
+</script>
+</html>
